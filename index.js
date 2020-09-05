@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
@@ -8,7 +10,7 @@ var router = require('./routes/router.js');
 app.use('/public', express.static('public'));
 app.use('/public', express.static('views'));
 
-app.use(express.static('D:/ANGULAR/AdminPanel/uploads'));
+const MY_PORT = process.env.PORT;
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -35,6 +37,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 //server port
-http.listen(3000, function(){
+http.listen(MY_PORT, function(){
   console.log('listening on *:3000');
 });
